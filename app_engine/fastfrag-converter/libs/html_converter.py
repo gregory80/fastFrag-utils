@@ -89,6 +89,9 @@ class FastFragHTMLParser(HTMLParser):
                 self.active_frag['content'] = [curr_node,text_data_dict]
             elif type(curr_node) == list:
                 logging.info("it's a list %s and %s " % (data,curr_node) )
+                if curr_node and "text" in curr_node[-1] and type(data) is str:
+                    curr_node.append({'text':data}) ## added by jsw
+                    self.active_frag['content']=curr_node 
             elif not curr_node:    
                 self.active_frag['content']=text_data_dict
 
